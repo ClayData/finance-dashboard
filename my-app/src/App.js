@@ -1,5 +1,5 @@
 import React from 'react';
-import FinanceChart from './components/FinanceChart'
+import FinanceChart from './components/FinanceChart/FinanceChart';
 
 function App() {
   return (

@@ -7,33 +7,16 @@ export default class FinanceChart extends Component {
         super()
 
         this.state = {
+            symbol : 'AMZN',
             inputData: []
         }
     }
     chartRef = React.createRef();
-
    
-        // try {
-        //   const response = await axios({
-        //     "method":"GET",
-        //     "url":"https://finnhub-realtime-stock-price.p.rapidapi.com/quote",
-        //     "headers":{
-        //     "content-type":"application/octet-stream",
-        //     "x-rapidapi-host":"finnhub-realtime-stock-price.p.rapidapi.com",
-        //     "x-rapidapi-key":"caaa1aa51cmsh34aeffc6045e01dp1cb5e9jsnff5f9d0222cc"
-        //     },"params":{
-        //     "symbol":"AAPL"
-        //     }
-        //     });
-        //   let finData = await response.data;
-        //   this.setState({ 
-        //       inputData: [finData.c, finData.h, finData.l, finData.o, finData.pc]
-        //   })
-          
-        // } catch (error) {
-        //   console.error(error);
-        // }
-      
+    chartMin(arr) {
+        let ret = Math.floor(Math.max((Math.min(...arr) - 5), 0));
+        return ret;
+    }
 
    async componentDidMount() {
         try {
@@ -45,7 +28,7 @@ export default class FinanceChart extends Component {
               "x-rapidapi-host":"finnhub-realtime-stock-price.p.rapidapi.com",
               "x-rapidapi-key":"caaa1aa51cmsh34aeffc6045e01dp1cb5e9jsnff5f9d0222cc"
               },"params":{
-              "symbol":"AAPL"
+              "symbol":this.state.symbol
               }
               });
             let finData = await response.data;
@@ -66,7 +49,7 @@ export default class FinanceChart extends Component {
             data: {
                 labels: ['Current', 'High', 'Low', 'Open', 'Prev. Close'],
                 datasets: [{
-                    label: '# of Votes',
+                    label: 'Major stock points',
                     data: this.state.inputData,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
@@ -89,7 +72,13 @@ export default class FinanceChart extends Component {
                 scales: {
                     yAxes: [{
                         ticks: {
-                            beginAtZero: true
+                            min: this.chartMin(this.state.inputData),
+                            
+                        }, 
+                        scaleLabel: {
+                            display: true,
+                            fontSize: 14,
+                            labelString: "Price",
                         }
                     }]
                 }
