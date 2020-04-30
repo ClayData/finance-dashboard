@@ -8,16 +8,19 @@ export default class FinanceChart extends Component {
 
         this.state = {
             symbol : 'AMZN',
+            name: 'AMAZON',
             inputData: []
         }
     }
     chartRef = React.createRef();
    
+    //Used to set minimum val of y-axis
     chartMin(arr) {
         let ret = Math.floor(Math.max((Math.min(...arr) - 5), 0));
         return ret;
     }
 
+    //Make call to FinnHub API to retrieve stock data
    async componentDidMount() {
         try {
             const response = await axios({
@@ -40,16 +43,15 @@ export default class FinanceChart extends Component {
             console.error(error);
           }
 
-        const myChartRef = this.chartRef.current.getContext("2d");
 
-            
-            console.log(this.state.inputData)
+          //Create bar chart of selected stock
+        const myChartRef = this.chartRef.current.getContext("2d");
             new Chart(myChartRef, {
             type: 'bar',
             data: {
                 labels: ['Current', 'High', 'Low', 'Open', 'Prev. Close'],
                 datasets: [{
-                    label: 'Major stock points',
+                    label: '',
                     data: this.state.inputData,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
@@ -69,6 +71,10 @@ export default class FinanceChart extends Component {
                 }]
             },
             options: {
+                title: {
+                    display: true,
+                    text: `${this.state.name}`
+                },
                 scales: {
                     yAxes: [{
                         ticks: {
@@ -78,7 +84,7 @@ export default class FinanceChart extends Component {
                         scaleLabel: {
                             display: true,
                             fontSize: 14,
-                            labelString: "Price",
+                            labelString: "Stock Price",
                         }
                     }]
                 }
