@@ -3,7 +3,19 @@ import FinanceChart from './components/FinanceChart/FinanceChart';
 import SearchAppBar from './components/SearchBar/SearchAppBar';
 
 
-function App() {
+class App extends React.Component {
+  constructor() {
+    super()
+
+    this.state = {
+        symbol : 'AMZN',
+        name: 'AMAZON',
+        inputData: []
+    }
+}
+
+
+  render(){
   return (
     <div>
       <div>
@@ -12,6 +24,7 @@ function App() {
       <FinanceChart />
     </div>
   );
+  }
 }
 
 export default App;

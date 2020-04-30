@@ -1,0 +1,43 @@
+[
+    {
+        "name": "Amazon",
+        "symbol": "AMZN"
+    },
+    {
+        "name": "Apple",
+        "symbol": "AAPL"
+    },
+    {
+        "name": "Wells Fargo",
+        "symbol": "WFC"
+    },
+    {
+        "name": "Google",
+        "symbol": "GOOG"
+    },
+    {
+        "name": "Amazon",
+        "symbol": "AMZN"
+    },
+    {
+        "name": "Tesla",
+        "symbol": "TSLA"
+    },
+    {
+        "name": "Uber",
+        "symbol": "Uber"
+    },
+    {
+        "name": "Facebook",
+        "symbol": "FB"
+    },
+    {
+        "name": "Disney",
+        "symbol": "DIS"
+    },
+    {
+        "name": "Starbucks",
+        "symbol": "SBUX"
+    }
+
+]

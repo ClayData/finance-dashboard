@@ -3,10 +3,12 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
+
+import data from '../../utils/companies.json';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,15 +38,6 @@ const useStyles = makeStyles((theme) => ({
       width: 'auto',
     },
   },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   inputRoot: {
     color: 'inherit',
   },
@@ -63,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchAppBar() {
+export default function SearchAppBar(props) {
   const classes = useStyles();
 
   return (
@@ -83,16 +76,23 @@ export default function SearchAppBar() {
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
-              <SearchIcon />
             </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
+            <div style={{ width: 300 }}>
+              <Autocomplete
+                freeSolo
+                id="free-solo-2-demo"
+                disableClearable
+                options={data.map((option) => `${option.symbol} | ${option.name} `)}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Search"
+                    variant="outlined"
+                    InputProps={{ ...params.InputProps, type: 'search' }}
+                  />
+                )}
+              />
+          </div>
           </div>
         </Toolbar>
       </AppBar>
