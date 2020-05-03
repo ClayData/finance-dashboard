@@ -82,13 +82,15 @@ export default function SearchAppBar(props) {
                 freeSolo
                 id="free-solo-2-demo"
                 disableClearable
-                options={data.map((option) => `${option.symbol} | ${option.name} `)}
+                options={data.map((option) => `${option.symbol}`)}
                 renderInput={(params) => (
                   <TextField
                     {...params}
                     label="Search"
                     variant="outlined"
                     InputProps={{ ...params.InputProps, type: 'search' }}
+                    onKeyDown={props.handleInputChange}
+                    value={params}
                   />
                 )}
               />
