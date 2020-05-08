@@ -12,19 +12,25 @@ class App extends React.Component {
     name: '',
     inputData: []
     }
+    // this.handleChange = this.handleChange.bind(this);
+    this.getData = this.getData.bind(this)
+    this.keyPressed = this.keyPressed.bind(this)
 }
 
 getData = (input) => {
+  
   chartCall(input).then(res => this.setState({ inputData: res }))
   .catch(err => console.log(err))
   console.log(this.state.inputData)
 }
 
-handleInputChange = e => {
-  let value = e.target.value
-  this.setState({ input: [] })
-  this.getData(value)
+keyPressed(event){
+  if(event.key === "Enter"){
+    this.getData(event.target.value)
+  }
 }
+
+
 
 
   render(){
@@ -32,7 +38,8 @@ handleInputChange = e => {
   return (
     <div>
       <SearchAppBar 
-      handleInputChange={this.handleInputChange}
+      handleChange={this.handleChange}
+      keyPressed={this.keyPressed}
       />
       <FinanceChart 
       name={name}
